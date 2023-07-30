@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>緊急気象情報配信アカウント-地震情報</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="main.js"></script>
+        <meta name="viewport"
+   content="width=320,
+      height=480,
+      initial-scale=1.0,
+      minimum-scale=1.0,
+      maximum-scale=2.0,
+      user-scalable=yes" />
+      <script src="main.js">    </script>   
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+      <link rel="icon" href="favicons/favicon-16x16.png">
+      <link rel="icon" type="image/png" href="./favicons/android-touch-icon-192x192.png" sizes="192x192">
+      <style>
+      .time{
+        color: grey;
+      }
+
+      .inner-block{
+        height: 150px;
+        overflow: scroll;
+      }
+      .class-name{
+        display: flex;
+      }
+      .popup{
+        position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none;
+      }
+      .popup-content{
+        width: 97.9%;
+      }
+@media screen and (max-width:480px) {
+      .popup-content{
+        width: 90%;
+      }}
+      </style>  
+      <style>
+        header{
+    width: 100%;
+    height: 500px;
+    background: url(../空0001.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.head_container{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1{
+    font-size: 18px;
+}
+
+.last_child{
+    border-right: 1px dotted black;
+}
+
+.container{
+    width: 800px;
+    margin: 0px auto;
+    display: flex;
+}
+
+.item01{
+    width: 100%;
+}
+
+.item01 h2{
+    text-align: center;
+    border-bottom: 1px solid navy;
+}
+
+.item01 img{
+    width: 50%;
+}
+
+.table-container {
+  overflow: auto; /* スクロールする */
+  white-space: nowrap; /* 自動改行しない */
+  width: 100%;
+  max-height: 200px;
+  border: 3px solid tomato;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.meal-table{
+  overflow: scroll; /* スクロールする */
+  white-space: nowrap; /* 自動改行しない */
+  width: 795px;
+  height: 200px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+table{
+  border-collapse: collapse;
+  text-align: center;
+}
+table th, table td{
+  border: 1px solid gray;
+}
+table th{
+  padding: 35px 40px;
+color: #fff;
+background: rgb(65, 188, 236);
+}
+table td{
+padding: 35px 40px;
+}
+
+.s1{
+color: black;
+background-color: greenyellow;
+}
+
+.s2{
+color: black;
+background-color: rgb(72, 255, 0);
+}
+
+.s3{
+color: black;
+background-color: yellow;
+}
+
+.s4{
+color: black;
+background-color: rgb(255, 184, 53);
+}
+
+.s5j{
+color: black;
+background-color: orange;
+}
+
+.s5k{
+color: black;
+background-color: rgb(255, 136, 0);
+}
+
+.s6j{
+color: black;
+background-color: rgb(255, 94, 0);
+}
+
+.s6k{
+color: black;
+background-color: orangered;
+}
+
+.s7{
+color: white;
+background-color: red;
+}
+
+.item02{
+    width: 100%;
+}
+
+.item02 h2{
+    font-size: 17px;
+    text-align: center;
+}
+
+.item02 ul{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.item02 li{
+    border-bottom: 1px dotted black;
+}
+
+.article_container{
+    display: flex;
+}
+
+.article_item1{
+    width: 36%;
+}
+
+.article_item2{
+    width: 60%;
+}
+
+.article_item1 img{
+    width: 99%;
+}
+
+.article_item2 img{
+    width: 99%;
+}
+
+.article_item1 p{
+    text-align: center;
+}
+
+.article_item2 p{
+    text-align: center;
+}
+
+.line_container{
+    text-align: center;
+    font-size: 25px;
+    background-color: greenyellow;
+}
+
+.linetital_container h2{
+    text-align: center;
+    font-size: 40px;
+    border-bottom: 3px solid black;
+}
+
+.linetital_container img{
+    width: 99%;
+}
+
+footer{
+    width: 100%;
+    background-color: #edff88;
+    margin: 0px;
+    padding: 30px 0px;
+}
+
+footer h2{
+    text-align: center;
+    font-size: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+  }
+  
+  .logo {
+    font-size: 24px;
+  }
+  
+  /* ここから下がハンバーガーメニューに関するCSS */
+    
+  /* チェックボックスを非表示にする */
+  .drawer_hidden {
+    display: none;
+  }
+  
+  /* ハンバーガーアイコンの設置スペース */
+  .drawer_open {
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;/* 重なり順を一番上にする */
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.699);
+    position: fixed;
+    top: 20px;
+  }
+  
+  /* ハンバーガーメニューのアイコン */
+  .drawer_open span,
+  .drawer_open span:before,
+  .drawer_open span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background: #333;
+    transition: 0.5s;
+    position: absolute;
+  }
+  
+  /* 三本線の一番上の棒の位置調整 */
+  .drawer_open span:before {
+    bottom: 8px;
+  }
+  
+  /* 三本線の一番下の棒の位置調整 */
+  .drawer_open span:after {
+    top: 8px;
+  }
+  
+  /* アイコンがクリックされたら真ん中の線を透明にする */
+  #drawer_input:checked ~ .drawer_open span {
+    background: rgba(255, 255, 255, 0);
+  }
+  
+  /* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+  #drawer_input:checked ~ .drawer_open span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+  }
+  
+  #drawer_input:checked ~ .drawer_open span::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+    
+  /* メニューのデザイン*/
+  .nav_content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%; /* メニューを画面の外に飛ばす */
+    z-index: 99;
+    background: #fff;
+    transition: .5s;
+  }
+  
+  /* メニュー黒ポチを消す */
+  .nav_list {
+    display: list-item;
+    list-style: none;
+    padding: 70px 0px 0px 70px;
+    font-size: 35px;
+  }
+
+  .nav_list a{
+    color: black;
+    text-decoration: none;
+  }
+
+  .nav_item{
+    display: flex;
+  }
+  
+  /* アイコンがクリックされたらメニューを表示 */
+  #drawer_input:checked ~ .nav_content {
+    left: 0;/* メニューを画面に入れる */
+  }
+
+  .nav{
+    width: 100%;
+  }
+
+  .nav h2{
+    padding: 0px 0px 100px 0px;
+    text-align: center;
+  }
+
+  .nav_item1{
+    padding-right: 100px;
+  }
+
+  .marquee{
+    font-size: 20px;
+  }
+
+  .yellow{
+    color: yellow;
+    font-size: 25px;
+  }
+
+  .red{
+    color: red;
+    font-size: 25px;
+  }
+
+  .purple{
+    color: purple;
+    font-size: 30px;
+  }
+  
+  .oshirase{
+    background-color: red;
+    width: 100%;
+    height: 70px;
+    padding: 20px 0px;
+    position: fixed;
+    top: 0px;
+  }
+
+  .oshirase h3{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .table1{
+    padding: 34px 336px;
+  }
+
+  .table2{
+    padding: 34px 336px;
+    color: red;
+  }
+
+  .test{
+    width: 100%;
+    height: 70px;
+  }
+
+  article{
+    width: 100%;
+  }
+
+  .item01_p{
+    font-size: 25px;
+  }
+
+  img {
+    max-width: 100%;
+}
+
+.photo_container {
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.item-thumbnail {
+    width: 120px;
+}
+.item-mainvisual {
+    width: 600px;
+}
+
+.time{
+  color: grey;
+}
+
+.inner-block{
+  height: 150px;
+  overflow: scroll;
+}
+.flex{
+width: 160px;
+display: flex;
+margin-left: 70px;
+background-color: gray;
+padding: 0.5em 1em;
+font-weight: bold;
+background: #FFF;
+border: solid 3px #6091d3;
+border-radius: 10px;
+}
+.image{
+margin: 0px;
+}
+.nav_item8 a{
+font-size: 30px;
+}
+.popup {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.5);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ z-index: 9999;
+ display: none;
+}
+
+.popup-content {
+ background-color: #fff;
+ padding: 20px;
+ border-radius: 5px;
+ text-align: center;
+}
+
+.popup-content h1 {
+ margin-top: 0;
+}
+
+.popup-content p {
+ margin-bottom: 20px;
+}
+
+#close-popup {
+ background-color: #007bff;
+ color: #fff;
+ border: none;
+ padding: 10px 20px;
+ border-radius: 5px;
+ cursor: pointer;
+}
+
+@media screen and (max-width:480px) { 
+    header{
+        width: 100%;
+        height: 370px;
+        background: url(../空0001.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .head_container{
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    h1{
+        font-size: 18px;
+    }
+    
+    
+    
+    .container{
+        width: 380px;
+        margin: 0px auto;
+        display: flex;
+    }
+    
+    .item01{
+        width: 100%;
+    }
+    
+    .item01 h2{
+        text-align: center;
+        border-bottom: 1px solid navy;
+    }
+    
+    .item01 img{
+        width: 99%;
+    }
+    
+    .item02{
+        width: 100%;
+        padding: 30px 0px 30px 0px;
+    }
+
+    .meal-table{
+      white-space: nowrap; /* 自動改行しない */
+      width: auto;
+      height: 200px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    table{
+      border-collapse: collapse;
+      text-align: center;
+    }
+    table th, table td{
+      border: 1px solid gray;
+    }
+    table th{
+      padding: 35px 40px;
+    color: #fff;
+    background: rgb(65, 188, 236);
+  }
+  table td{
+    padding: 35px 40px;
+  }
+
+  .s1{
+    color: black;
+    background-color: greenyellow;
+  }
+
+  .s2{
+    color: black;
+    background-color: rgb(72, 255, 0);
+  }
+
+  .s3{
+    color: black;
+    background-color: yellow;
+  }
+
+  .s4{
+    color: black;
+    background-color: rgb(255, 184, 53);
+  }
+
+  .s5j{
+    color: black;
+    background-color: orange;
+  }
+
+  .s5k{
+    color: black;
+    background-color: rgb(255, 136, 0);
+  }
+
+  .s6j{
+    color: black;
+    background-color: rgb(255, 94, 0);
+  }
+
+  .s6k{
+    color: black;
+    background-color: orangered;
+  }
+
+  .s7{
+    color: white;
+    background-color: red;
+  }
+    
+    .item02 h2{
+        font-size: 30px;
+        text-align: center;
+    }
+    
+    .item02 ul{
+        list-style-type: none;
+        padding-left: 0px;
+    }
+    
+    .item02 li{
+        border-bottom: 1px dotted black;
+    }
+    
+    .article_container{
+        display: flex;
+    }
+    
+    .article_item1{
+        width: 36%;
+    }
+    
+    .article_item2{
+        width: 60%;
+    }
+    
+    .article_item1 img{
+        width: 99%;
+    }
+    
+    .article_item2 img{
+        width: 99%;
+    }
+    
+    .article_item1 p{
+        text-align: center;
+    }
+    
+    .article_item2 p{
+        text-align: center;
+    }
+    
+    .line_container{
+        text-align: center;
+        font-size: 25px;
+        background-color: greenyellow;
+    }
+    
+    .linetital_container h2{
+        text-align: center;
+        font-size: 40px;
+        border-bottom: 3px solid black;
+    }
+    
+    .linetital_container img{
+        width: 99%;
+    }
+    
+    footer{
+        width: 100%;
+        background-color: #edff88;
+        margin: 0px;
+        padding: 30px 0px;
+    }
+    
+    footer h2{
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+      }
+      
+      .logo {
+        font-size: 24px;
+      }
+      
+      /* ここから下がハンバーガーメニューに関するCSS */
+        
+      /* チェックボックスを非表示にする */
+      .drawer_hidden {
+        display: none;
+      }
+      
+      /* ハンバーガーアイコンの設置スペース */
+      .drawer_open {
+        display: flex;
+        height: 60px;
+        width: 60px;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 100;/* 重なり順を一番上にする */
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.699);
+        position: fixed;
+        top: 25px;
+      }
+      
+      /* ハンバーガーメニューのアイコン */
+      .drawer_open span,
+      .drawer_open span:before,
+      .drawer_open span:after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 25px;
+        border-radius: 3px;
+        background: #333;
+        transition: 0.5s;
+        position: absolute;
+      }
+      
+      /* 三本線の一番上の棒の位置調整 */
+      .drawer_open span:before {
+        bottom: 8px;
+      }
+      
+      /* 三本線の一番下の棒の位置調整 */
+      .drawer_open span:after {
+        top: 8px;
+      }
+      
+      /* アイコンがクリックされたら真ん中の線を透明にする */
+      #drawer_input:checked ~ .drawer_open span {
+        background: rgba(255, 255, 255, 0);
+      }
+      
+      /* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+      #drawer_input:checked ~ .drawer_open span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+      }
+      
+      #drawer_input:checked ~ .drawer_open span::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+        
+      /* メニューのデザイン*/
+      .nav_content {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%; /* メニューを画面の外に飛ばす */
+        z-index: 99;
+        background: #fff;
+        transition: .5s;
+      }
+      
+      /* メニュー黒ポチを消す */
+      .nav_list {
+        display: list-item;
+        list-style: none;
+        padding: 70px 0px 0px 70px;
+        font-size: 35px;
+      }
+
+      .nav_list a{
+        color: black;
+        text-decoration: none;
+      }
+
+      .nav_item{
+        display: flex;
+      }
+      
+      /* アイコンがクリックされたらメニューを表示 */
+      #drawer_input:checked ~ .nav_content {
+        left: 0;/* メニューを画面に入れる */
+      }
+    
+      .nav{
+        width: 100%;
+      }
+
+      .nav h2{
+        padding: 100px 0px 100px 0px;
+        text-align: center;
+      }
+
+      .nav_item1{
+        padding-right: 100px;
+      }
+
+      .yellow{
+        color: yellow;
+        font-size: 25px;
+      }
+    
+      .red{
+        color: red;
+        font-size: 25px;
+      }
+    
+      .purple{
+        color: purple;
+        font-size: 30px;
+      }
+
+      .oshirase{
+        background-color: red;
+        width: 100%;
+        height: 70px;
+        position: fixed;
+        padding-left: 60px;
+      }
+
+      .oshirase h3{
+        color: white;
+        text-align: center;
+        width: 320px;
+        word-wrap: break-word;
+        top: 0px;
+        line-height: 20px;
+      }
+
+      .table1{
+        padding: 34px 127px;
+      }
+    
+      .table2{
+        padding: 34px 127px;
+        color: red;
+      }
+      
+      img {
+        max-width: 100%;
+    }
+    
+    .photo_container {
+        width: 90%;
+        margin: 30px auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    .item-thumbnail {
+        width: 120px;
+    }
+    .item-mainvisual {
+        width: 600px;
+    }
+    .table-container {
+      max-height: 300px;
+      overflow: scroll;
+    }
+}
+      </style>
+    </head>
+    <body>
+        <header>
+            <header class="header">
+                <!-- ヘッダーロゴ -->
+                <div class="logo"></div>
+              
+                <!-- ハンバーガーメニュー部分 -->
+                <div class="nav">
+              
+                  <!-- ハンバーガーメニューの表示・非表示を切り替えるチェックボックス -->
+                  <input id="drawer_input" class="drawer_hidden" type="checkbox">
+              
+                  <!-- ハンバーガーアイコン -->
+                  <label for="drawer_input" class="drawer_open"><span></span></label>
+              
+                  <!-- メニュー -->
+                  <nav class="nav_content">
+                    <div class="flex">
+                    <figure class="image"><img class="nav_item8" src="./無料のベルアイコン素材 その6 (1).png"></figure>
+                    <div class="right">
+                    <li class="nav_item8" style="list-style-type:none"><a href="#" id="popup-link" style="text-decoration: none; color: black;">お知らせ</a></li>
+                      <div id="popup" class="popup">
+                    <div class="popup-content" style="margin: 0px;">
+                    <h3>お知らせ</h3>
+                    <div class="dtimer" data-sh="6" data-eh="21">
+                    <div class="inner-block" style="overflow: scroll; height: 100px;">
+                      <div class="product-list">
+                        <div class="product-item3 js-based3">
+                            <div class="product-data" style="display: inline; line-height: 5px;">
+                              <div class="class-name" style="justify-content: center;">
+                              <p class="letter1" style="margin: 0px;"></p>
+                              <p class="time" style="margin: 0px;"></p>
+                              </div>
+                              <div class="line-one">
+                              <p class="alternate-text"></p>
+                              </div>
+                              <p class="letter2" style="margin: 0px;"></p>
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                      </div>
+                    <div class="dtimer" data-sh="21" data-eh="24">
+                      <h3>本日のお知らせの掲載は終了いたしました</h3>
+                    </div>
+                    <div class="dtimer" data-sh="0" data-eh="7">
+                      <h3>本日のお知らせの掲載は7:00からです。</h3>
+                    </div>
+                    <button id="close-popup">閉じる</button>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                  <ul class="nav_list" style="padding-top: 0px; margin-top: 0px;">
+                    <li class="nav_item1"><a href="https://saigaikinkyuu.github.io/site-homepage/#">ホーム</a></li>
+                    <li class="nav_item1"><a href="https://kinkyuujyouhou-service-information.netlify.app">サービス情報</a></li>
+                    <details><summary>気象情報</summary>
+                    <li class="nav_item2"></li>
+                    <li class="nav_item2"><a href="https://kinkyuujyouhou-kishou.netlify.app" style="font-size: 30px;">　地震情報</a></li>
+                    <li class="nav_item2"><a href="https://kinkyuujyouhou-weather.netlify.app" style="font-size: 30px;">　避難情報・気象警報</a></li>
+                    </details>
+                    <li class="nav_item3"><a href="https://forms.gle/ax7ZcC6EVyjFaJEw9">お問い合わせ</a></li>
+                    <li class="nav_item4"><a href="https://kinkyuujyouhou-riyoukiyaku.netlify.app">利用規約</a></li>
+                    <li class="nav_item5"><a href="https://forms.gle/5sQQSLosKJ5QbWG78">緊急用伝言サービス</a></li>
+                    <li class="nav_item6"><a href="https://site-haishin.netlify.app">大規模地震配信</a></li>
+                    <li class="nav_item7"><a href="https://kinkyuujyouhou-jalert.netlify.app">Jアラート情報</a></li>
+                    <script>
+                      $(document).ready(function() {
+// リンクをクリックした時のイベントハンドラを設定します
+$("#popup-link").click(function(event) {
+  event.preventDefault(); // リンクのデフォルトの挙動をキャンセルします
+  $("#popup").fadeIn(); // ポップアップを表示します
+});
+
+// 閉じるボタンがクリックされた時にポップアップを非表示にします
+$("#close-popup").click(function() {
+  $("#popup").fadeOut();
+});
+});
+
+                    </script>
+                        <script>
+                          var api_url = 'https://script.google.com/macros/s/AKfycbwSmhocawGOXs-e0cdiJ_HhkThItCl6U6qBCpBY8xRs8UUAZHwDWZ1BSFR6MCX-SVcWVw/exec';
+                          
+                          fetch(api_url)
+                            .then(function (fetch_data) {
+                              return fetch_data.json();
+                            })
+                            .then(function (json) {
+                              for (var i in json) {
+                                if (json[i].time && json[i].letter1 && json[i].letter2) {
+                                  var base_element = document.getElementsByClassName('product-item3 js-based3');
+                                  var clone_element = base_element[0].cloneNode(true);
+                                  clone_element.classList.remove('js-based');
+                                  clone_element.querySelector('.time').textContent = json[i].time;
+                                  clone_element.querySelector('.letter1').textContent = json[i].letter1;
+                                  clone_element.querySelector('.letter2').textContent = json[i].letter2;
+                                  console.log(json[i].letter1)
+                          
+                                  // 条件に応じてスタイルを適用
+                                  if (json[i].letter1 === '【障害】') {
+                                    clone_element.querySelector('.letter1').classList.add('red-text');
+                                    clone_element.querySelector('.alternate-text').textContent = '〈発生した障害について〉';
+                                  } else if (json[i].letter1 === '【重要】') {
+                                    clone_element.querySelector('.letter1').classList.add('red-text');
+                                    clone_element.querySelector('.alternate-text').textContent = '〈重要なお知らせについて〉';
+                                  } else if (json[i].letter1 === '【緊急】') {
+                                    clone_element.querySelector('.letter1').classList.add('red-text');
+                                    clone_element.querySelector('.alternate-text').textContent = '〈緊急のお知らせについて〉';
+                                  } else if (json[i].letter1 === '【復旧】') {
+                                    clone_element.querySelector('.letter1').classList.add('green-text');
+                                    clone_element.querySelector('.alternate-text').textContent = '〈復旧した障害につぃて〉';
+                                  } else if (json[i].letter1 === '【お知らせ】') {
+                                    clone_element.querySelector('.letter1').classList.add('black-text');
+                                    // `【お知らせ】`の場合、`.alternate-text`のテキストを空白にする
+                                    clone_element.querySelector('.alternate-text').textContent = '';
+                                  } else {
+                                    var alternateTextElement = clone_element.querySelector('.alternate-text');
+                                    if (alternateTextElement) {
+                                      alternateTextElement.textContent = '';
+                                    }
+                                  }
+                          
+                                  base_element[0].parentNode.appendChild(clone_element);
+                                }
+                              }
+                            });
+                          
+                                                    </script>
+                    </ul>
+                  </nav>
+                  <h2>当ページでは地震情報の掲載を行っています</h2>
+             
+                </div>
+            
+        </header>
+        <div>
+          <script>
+            var api_url = 'https://script.google.com/macros/s/AKfycbwp1T6EyVyAEKMzjTgyVBVKiXFtor2vqv-ZiqvUVQC_-1qIYLmSznVLLTaYGDA3S1sP4w/exec';
+            
+            console.log('1');
+            fetch(api_url)
+              .then(function (fetch_data) {
+                return fetch_data.json();
+              })
+              .then(function (json) {
+                for (var i in json) {
+                  console.log('2');
+                  var I = document.getElementsByClassName("nav_item1")[0]; // 最初の要素を取得
+                  var I2 = document.getElementsByClassName("nav_item1")[1]; // 最初の要素を取得
+                  var I3 = document.getElementsByClassName("nav_item2")[2]; // 最初の要素を取得
+                  var I4 = document.getElementsByClassName("nav_item3")[0]; // 最初の要素を取得
+                  var I5 = document.getElementsByClassName("nav_item4")[0]; // 最初の要素を取得
+                  console.log(I);
+                  if (json[i].situation === 'stop publish') {
+                    // 何も行わない
+                  } else if (json[i].situation === '') {
+                  } else {
+                    I.classList.add('not');
+                    I2.classList.add('not');
+                    I3.classList.add('not');
+                    I4.classList.add('not');
+                    I5.classList.add('not');
+                  }
+                  
+                  const notElements = document.querySelectorAll('.not');
+                  notElements.forEach(element => {
+                    element.remove();
+                  });
+                }
+              });
+          </script>
+        </div>
+        <div class="container">
+                <div class="item02">
+                <aside>
+                    <h2>本日の地震情報</h2>
+                    <p>出典：気象庁|全国の防災情報　（<a style="overflow-wrap: break-word;" href="https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano"target="_blank">https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano</a>)</p>
+                    <p>※別タブで開きます</p>
+                    <p>※5分ごとに、地震情報が更新されます。すぐに更新する際は、サイトごとリロードしてください。</p>
+                    <div class="dtimer" data-sh="6" data-eh="22">
+                      <div class="table-container">
+    <table class="meal-table">
+      <thead>
+        <tr>
+          <th>時刻</th>
+          <th>震源地</th>
+          <th>震度</th>
+          <th>深さ</th>
+          <th>マグニチュード</th>
+        </tr>
+      </thead>
+      <tbody id="product-table">
+      </tbody>
+    </table>
+  </div>
+    <script>
+      function fetchData() {
+  // テーブルのボディ要素を取得
+  var table_body = document.getElementById('product-table');
+
+  // ボディ要素の子要素（セル）を削除
+  while (table_body.firstChild) {
+    table_body.removeChild(table_body.firstChild);
+  }
+
+  var api_url = 'https://script.google.com/macros/s/AKfycbw3JdARqVgMi4HzDxlaExRdIP67DQPqjC6K36dIryADTRjVZHVJA0HNpfgS2G3bV7D-pg/exec';
+
+  fetch(api_url)
+    .then(function(fetch_data) {
+      return fetch_data.json();
+    })
+    .then(function(json) {
+      for (var i in json) {
+        if (json[i].time && json[i].place && json[i].number && json[i].depth && json[i].m) {
+          var row = document.createElement('tr');
+          
+          var time_cell = document.createElement('td');
+          time_cell.textContent = json[i].time;
+          row.appendChild(time_cell);
+          
+          var place_cell = document.createElement('td');
+          place_cell.textContent = json[i].place;
+          row.appendChild(place_cell);
+          
+          var number_cell = document.createElement('td');
+          number_cell.textContent = json[i].number;
+          row.appendChild(number_cell);
+
+          var depth_cell = document.createElement('td');
+          depth_cell.textContent = json[i].depth;
+          row.appendChild(depth_cell);
+
+          var m_cell = document.createElement('td');
+          m_cell.textContent = json[i].m;
+          row.appendChild(m_cell);
+          
+          table_body.appendChild(row);
+        }
+      }
+    });
+}
+
+// 初回実行時にデータを取得する
+fetchData();
+
+// 10分ごとにfetchDataを実行する
+setInterval(fetchData, 5 * 60 * 1000); // 10分 = 10 * 60 * 1000 ミリ秒
+
+    </script>
+
+
+                  </div>
+                    <div class="dtimer" data-sh="22" data-eh="24">
+                    <h3 class="red">掲載時間外です</h3>
+                      <div class="meal-table">
+                        
+                          <table>
+                            <tr>
+                              <th class="table1">地震情報</th>
+                            </tr>
+                            <tr>
+                              <td class="table2">掲載時間外です</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="dtimer" data-sh="0" data-eh="6">
+                        <h3 class="red">掲載時間外です</h3>
+                          <div class="meal-table">
+                            
+                            <table>
+                              <tr>
+                                <th class="table1">地震情報</th>
+                              </tr>
+                              <tr>
+                                <td class="table2">掲載時間外です</td>
+                              </tr>
+                            </table>
+                            </div>
+                          </div>
+                        <script src="js/main.js"></script>
+                </aside>
+            </div>
+                    
+            </div>
+        </div>
+            
+        
+        <footer>
+            <h2>©2023 EWIDE緊急気象情報配信アカウント</h2>
+        </footer>
+    </body>
+</html>
