@@ -1036,30 +1036,27 @@ $("#close-popup").click(function() {
                         </div>
                     </label>
                         <script>
-                            // チェックボックス要素を取得
-var checkbox = document.getElementById('checkbox');
+    // チェックボックス要素を取得
+    var checkbox = document.getElementById('checkbox');
 
-// チェックボックスが変更されたときに実行する関数
-checkbox.addEventListener('change', function() {
-    console.log("起動A")
-    // チェックボックスの状態を確認
-    if (checkbox.checked) {
-        // チェックがついた場合、クラス名が "element" の要素を非表示にする
-        var elements = document.getElementById('limit');
-        for (var i = 0; i < elements.length; i++) {
-            console.log("起動1")
-            elements[i].style.display = 'none';
-        }
-    } else {
-        // チェックが外れた場合、クラス名が "element" の要素を表示する
-        var elements = document.getElementById('limit');
-        for (var i = 0; i < elements.length; i++) {
-            console.log("起動2")
-            elements[i].style.display = '';
-        }
-    }
-});
+    // 要素を取得
+    var elements = document.querySelectorAll('#limit');
 
+    // チェックボックスの変更を監視
+    checkbox.addEventListener('change', function() {
+      // チェックボックスがチェックされているかどうかを確認
+      if (checkbox.checked) {
+        // チェックされている場合、全ての要素を非表示にする
+        elements.forEach(function(element) {
+          element.style.display = 'none';
+        });
+      } else {
+        // チェックされていない場合、全ての要素を表示する
+        elements.forEach(function(element) {
+          element.style.display = ''; // または 'inline' など適切な表示方法に変更
+        });
+      }
+    });
                         </script>
                         <style>
                             .toggle-button-004 {
