@@ -1054,7 +1054,7 @@ $("#close-popup").click(function() {
     table_body.removeChild(table_body.firstChild);
   }
 
-  var api_url = 'https://script.google.com/macros/s/AKfycbw3JdARqVgMi4HzDxlaExRdIP67DQPqjC6K36dIryADTRjVZHVJA0HNpfgS2G3bV7D-pg/exec';
+  var api_url = 'https://script.google.com/macros/s/AKfycbwFRbt97joaKHGHMhjEAV-igpcEkTy4m1v6gy4_PuoqKIMA8308ckmi5X5b98HdcK9qIg/exec';
 
   fetch(api_url)
     .then(function(fetch_data) {
@@ -1062,27 +1062,38 @@ $("#close-popup").click(function() {
     })
     .then(function(json) {
       for (var i in json) {
-        if (json[i].time && json[i].place && json[i].number && json[i].depth && json[i].m) {
+        if (json[i].cod && json[i].at && json[i].anm && json[i].mag && json[i].maxi) {
           var row = document.createElement('tr');
           
           var time_cell = document.createElement('td');
-          time_cell.textContent = json[i].time;
+          var date = new Date(json[i].at);
+          // 通常の日時表記に変換
+          var year = date.getFullYear();
+          var month = (date.getMonth() + 1).toString().padStart(2, '0'); // 月は0から始まるため+1する
+          var day = date.getDate().toString().padStart(2, '0');
+          var hours = date.getHours().toString().padStart(2, '0');
+          var minutes = date.getMinutes().toString().padStart(2, '0');
+          var seconds = date.getSeconds().toString().padStart(2, '0');
+
+          time_cell.textContent = year + "年" + month + "月" + day + "日 " + hours + "時" + minutes + "分";
           row.appendChild(time_cell);
           
           var place_cell = document.createElement('td');
-          place_cell.textContent = json[i].place;
+          place_cell.textContent = json[i].anm;
           row.appendChild(place_cell);
           
           var number_cell = document.createElement('td');
-          number_cell.textContent = json[i].number;
+          number_cell.textContent = json[i].maxi;
           row.appendChild(number_cell);
 
           var depth_cell = document.createElement('td');
-          depth_cell.textContent = json[i].depth;
+          depth_cell.textContent = json[i].cod;
+          depth_cell.textContent = depth_cell.substr(-5);
+          depth_cell.textContent = depth_cell.substr(0, 2);
           row.appendChild(depth_cell);
 
           var m_cell = document.createElement('td');
-          m_cell.textContent = json[i].m;
+          m_cell.textContent = json[i].mag;
           row.appendChild(m_cell);
           
           table_body.appendChild(row);
