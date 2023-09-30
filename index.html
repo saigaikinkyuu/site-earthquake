@@ -1041,17 +1041,20 @@ var checkbox = document.getElementById('checkbox');
 
 // チェックボックスが変更されたときに実行する関数
 checkbox.addEventListener('change', function() {
+    console.log("起動A")
     // チェックボックスの状態を確認
     if (checkbox.checked) {
         // チェックがついた場合、クラス名が "element" の要素を非表示にする
         var elements = document.getElementById('limit');
         for (var i = 0; i < elements.length; i++) {
+            console.log("起動1")
             elements[i].style.display = 'none';
         }
     } else {
         // チェックが外れた場合、クラス名が "element" の要素を表示する
         var elements = document.getElementById('limit');
         for (var i = 0; i < elements.length; i++) {
+            console.log("起動2")
             elements[i].style.display = '';
         }
     }
