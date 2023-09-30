@@ -1028,170 +1028,60 @@ $("#close-popup").click(function() {
                     <p>出典：気象庁|全国の防災情報　（<a style="overflow-wrap: break-word;" href="https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano"target="_blank">https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano</a>)</p>
                     <p>※別タブで開きます</p>
                     <p>※5分ごとに、地震情報が更新されます。すぐに更新する際は、サイトごとリロードしてください。</p>
-                    <div class="dtimer" data-sh="6" data-eh="22">
-                        <div class="toggle-button-cover">
-                            <div class="button-cover">
-                                <div class="button b2" id="button-18">
-                                    <input type="checkbox" class="checkbox" />
-                                    <div class="knobs">
-                                        <span></span>
-                                    </div>
-                                    <div class="layer"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <style>
-                            .row {
-  display: table-row;
+                    <div class="dtimer" data-sh="6" data-eh="22"><label class="toggle-button-004">
+                        <input type="checkbox"/>
+                    </label>
+                        <style>.toggle-button-004 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100px;
+    height: 50px;
+    border-radius: 50px;
+    box-sizing: content-box;
+    background-color: #ff8f8f33;
+    cursor: pointer;
+    transition: background-color .4s;
 }
 
-.toggle-button-cover {
-  display: table-cell;
-  position: relative;
-  width: 200px;
-  height: 140px;
-  box-sizing: border-box;
+.toggle-button-004:has(:checked) {
+    background-color: #75bbff33;
 }
 
-.button-cover {
-  height: 100px;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 10px 20px -8px #c5d6d6;
-  border-radius: 4px;
+.toggle-button-004::before {
+    position: absolute;
+    left: 5px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #ff8f8f;
+    content: '';
+    transition: left .4s;
 }
 
-.button-cover:before {
-  counter-increment: button-counter;
-  content: counter(button-counter);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  color: #d7e3e3;
-  font-size: 12px;
-  line-height: 1;
-  padding: 5px;
+.toggle-button-004:has(:checked)::before {
+    left: 50px;
+    background-color: #75bbff;
 }
 
-.button-cover,
-.knobs,
-.layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.toggle-button-004::after {
+    position: absolute;
+    left: 26px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 600;
+    font-size: .9em;
+    content: '本日';
+    transition: left .4s;
 }
 
-.button {
-  position: relative;
-  top: 50%;
-  width: 74px;
-  height: 36px;
-  margin: -20px auto 0 auto;
-  overflow: hidden;
+.toggle-button-004:has(:checked)::after {
+    left: 71px;
+    content: '1ヶ月';
 }
 
-.button.r,
-.button.r .layer {
-  border-radius: 100px;
-}
-
-.button.b2 {
-  border-radius: 2px;
-}
-
-.checkbox {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.knobs {
-  z-index: 2;
-}
-
-.layer {
-  width: 100%;
-  background-color: #ebf7fc;
-  transition: 0.3s ease all;
-  z-index: 1;
-}
-                            #button-18 .knobs:before,
-                            #button-18 .knobs span {
-                                content: "本日";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  background-color: #03a9f4;
-  border-radius: 2px;
-}
-
-#button-18 .knobs:before {
-  top: 50%;
-  left: 8px;
-  width: 20px;
-  height: 10px;
-  margin-top: -5px;
-  background-color: transparent;
-  z-index: 2;
-}
-
-#button-18 .knobs span {
-  width: 20px;
-  height: 10px;
-  padding: 9px 4px;
-  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  z-index: 1;
-}
-
-#button-18 .checkbox:active + .knobs:before {
-  left: 10px;
-  width: 46px;
-  height: 4px;
-  color: transparent;
-  margin-top: -2px;
-  background-color: #0095d8;
-  transition: 0.3s ease all;
-  overflow: hidden;
-}
-
-#button-18 .checkbox:active + .knobs span {
-  width: 58px;
-}
-
-#button-18 .checkbox:checked:active + .knobs:before {
-  left: auto;
-  right: 10px;
-  background-color: #d80000;
-}
-
-#button-18 .checkbox:checked:active + .knobs span {
-  margin-left: -38px;
-}
-
-#button-18 .checkbox:checked + .knobs:before {
-  content: "30日";
-  left: 47px;
-}
-
-#button-18 .checkbox:checked + .knobs span {
-  left: 42px;
-  background-color: #f44336;
-}
-
-#button-18 .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
+.toggle-button-004 input {
+    display: none;
 }
                         </style>
                       <div class="table-container">
