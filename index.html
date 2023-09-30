@@ -1032,10 +1032,30 @@ $("#close-popup").click(function() {
                         <div style="display: flex;">
                         <label style="padding-top: 10px;">表示期間</label>
                         <label class="toggle-button-004">
-                        <input type="checkbox"/>
+                        <input type="checkbox" id="checkbox"/>
                         </div>
                     </label>
-                        <style>.toggle-button-004 {
+                        <script>
+                            // チェックボックス要素を取得
+var checkbox = document.getElementById('checkbox');
+
+// チェックボックスが変更されたときに実行する関数
+checkbox.addEventListener('change', function() {
+    // チェックボックスの状態を確認
+    if (checkbox.checked) {
+        // チェックがついた場合、クラス名が "element" の要素を非表示にする
+        var elements = document.getElementsByClassName('limit');
+            elements.style.display = 'none';
+    } else {
+        // チェックが外れた場合、クラス名が "element" の要素を表示する
+        var elements = document.getElementsByClassName('limit');
+            elements.style.display = 'block';
+    }
+});
+
+                        </script>
+                        <style>
+                            .toggle-button-004 {
     display: flex;
     align-items: center;
     position: relative;
@@ -1155,6 +1175,18 @@ $("#close-popup").click(function() {
           m_cell.textContent = json[i].mag;
           row.appendChild(m_cell);
           
+            var year_and_date = year + "-" + month + "-" + day;
+            var year_and_date_new = new Date();   
+            var year_new = year_and_date_new.getFullYear();
+            var month_new = (year_and_date_new.getMonth() + 1).toString().padStart(2, '0'); // 月は0から始まるため+1する
+            var day_new = year_and_date_new.getDate().toString().padStart(2, '0');
+            var year_and_date_New = year_new + "-" + month_new + "-" + day_new;
+            if (year_and_date === year_and_date_New) {
+                //何も行わない
+            }else {
+                row.id = 'limit';
+            }
+            
           table_body.appendChild(row);
         }
       }
