@@ -1028,8 +1028,12 @@ $("#close-popup").click(function() {
                     <p>出典：気象庁|全国の防災情報　（<a style="overflow-wrap: break-word;" href="https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano"target="_blank">https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=earthquake_volcano</a>)</p>
                     <p>※別タブで開きます</p>
                     <p>※5分ごとに、地震情報が更新されます。すぐに更新する際は、サイトごとリロードしてください。</p>
-                    <div class="dtimer" data-sh="6" data-eh="22"><label class="toggle-button-004">
+                    <div class="dtimer" data-sh="6" data-eh="22">
+                        <div style="display: flex;">
+                        <label style="padding-top: 10px;">表示期間</label>
+                        <label class="toggle-button-004">
                         <input type="checkbox"/>
+                        </div>
                     </label>
                         <style>.toggle-button-004 {
     display: flex;
@@ -1077,7 +1081,7 @@ $("#close-popup").click(function() {
 
 .toggle-button-004:has(:checked)::after {
     left: 71px;
-    content: '1ヶ月';
+    content: '1週間';
 }
 
 .toggle-button-004 input {
