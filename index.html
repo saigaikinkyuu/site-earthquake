@@ -1044,11 +1044,11 @@ checkbox.addEventListener('change', function() {
     // チェックボックスの状態を確認
     if (checkbox.checked) {
         // チェックがついた場合、クラス名が "element" の要素を非表示にする
-        var elements = document.getElementsByClassName('limit');
+        var elements = document.getElementsByID('limit');
             elements.style.display = 'none';
     } else {
         // チェックが外れた場合、クラス名が "element" の要素を表示する
-        var elements = document.getElementsByClassName('limit');
+        var elements = document.getElementsByID('limit');
             elements.style.display = 'block';
     }
 });
