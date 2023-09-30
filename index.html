@@ -1088,7 +1088,7 @@ $("#close-popup").click(function() {
 
           var depth_cell = document.createElement('td');
           var depth_data = json[i].cod.substr(-5);
-          depth_cell.textContent = depth_data.substr(0, 2);
+          depth_cell.textContent = depth_data.substr(2, 0);
           row.appendChild(depth_cell);
 
           var m_cell = document.createElement('td');
